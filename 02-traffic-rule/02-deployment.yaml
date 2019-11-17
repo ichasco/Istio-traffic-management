@@ -2,23 +2,23 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: traffic-mirror-v1
+  name: traffic-rule-v1
   namespace: istio-poc
   labels:
-    app: traffic-mirror
+    app: traffic-rule
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: traffic-mirror
+      app: traffic-rule
   template:
     metadata:
       labels:
-        app: traffic-mirror
+        app: traffic-rule
         version: v1
     spec:
       containers:
-      - name: traffic-mirror
+      - name: traffic-rule
         image: ichasco/test-app:v1
         imagePullPolicy: Always
 
@@ -26,23 +26,23 @@ spec:
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: traffic-mirror-v2
+  name: traffic-rule-v2
   namespace: istio-poc
   labels:
-    app: traffic-mirror
+    app: traffic-rule
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: traffic-mirror
+      app: traffic-rule
   template:
     metadata:
       labels:
-        app: traffic-mirror
+        app: traffic-rule
         version: v2
     spec:
       containers:
-      - name: traffic-mirror
+      - name: traffic-rule
         image: ichasco/test-app:v2
         imagePullPolicy: Always
 ---
