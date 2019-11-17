@@ -1,0 +1,48 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: traffic-mirror-v1
+  namespace: istio-poc
+  labels:
+    app: traffic-mirror
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: traffic-mirror
+  template:
+    metadata:
+      labels:
+        app: traffic-mirror
+        version: v1
+    spec:
+      containers:
+      - name: traffic-mirror
+        image: ichasco/test-app:v1
+        imagePullPolicy: Always
+
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: traffic-mirror-v2
+  namespace: istio-poc
+  labels:
+    app: traffic-mirror
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: traffic-mirror
+  template:
+    metadata:
+      labels:
+        app: traffic-mirror
+        version: v2
+    spec:
+      containers:
+      - name: traffic-mirror
+        image: ichasco/test-app:v2
+        imagePullPolicy: Always
+---
