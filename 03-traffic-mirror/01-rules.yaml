@@ -1,13 +1,11 @@
 ---
+---
 apiVersion: networking.istio.io/v1alpha3
 kind: DestinationRule
 metadata:
-  name: traffic-rule
+  name: traffic-mirror
 spec:
-  host: traffic-rule
-  trafficPolicy:
-    tls:
-      mode: ISTIO_MUTUAL
+  host: traffic-mirror
   subsets:
   - name: v1
     labels:

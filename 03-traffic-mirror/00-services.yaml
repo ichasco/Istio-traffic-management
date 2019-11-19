@@ -2,13 +2,13 @@
 kind: Service
 apiVersion: v1
 metadata:
-  name: traffic-rule
+  name: traffic-mirror
   namespace: istio-poc
   labels:
-    app: traffic-rule
+    app: traffic-mirror
 spec:
   selector:
-    app: traffic-rule
+    app: traffic-mirror
   type: ClusterIP
   ports:
   - name: http
@@ -18,29 +18,24 @@ spec:
 apiVersion: networking.istio.io/v1alpha3
 kind: VirtualService
 metadata:
-  name: traffic-rule
+  name: traffic-mirror
   namespace: istio-poc
 spec:
   hosts:
-    - traffic-rule.104.155.93.105.nip.io
+  - traffic-mirror.104.155.93.105.nip.io
   gateways:
-    - istio-poc
+  - istio-poc
   http:
     - match:
-      - headers:
-          user-agent:
-            regex: '.*Firefox.*'
+      - uri:
+          prefix: /
       route:
       - destination:
-          host: traffic-rule
+          host: traffic-mirror
           subset: v1
-    - match:
-      - headers:
-          user-agent:
-            regex: '.*curl.*'
-      route:
-      - destination:
-          host: traffic-rule
+        weight: 100
+      mirror:
+          host: traffic-mirror
           subset: v2
-
+      mirror_percent: 100
 ---
