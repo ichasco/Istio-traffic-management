@@ -32,6 +32,4 @@ spec:
       route:
       - destination:
           host: circuit-breaker
-        #   subset: v1
-        # weight: 100
 ---
